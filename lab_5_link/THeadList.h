@@ -1,3 +1,4 @@
+#pragma once
 #include "TList.h"
 
 template <class T>

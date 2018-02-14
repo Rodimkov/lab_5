@@ -1,12 +1,12 @@
+#pragma once
 #include <iostream>
-#include "TList.h"
 #include <time.h>
-
+#include "Polinom.h"
 using namespace std;
 
 int main()
 {
-	TList<int> a;
+	Polinom po();
 
 	system("pause");
 	return 0;

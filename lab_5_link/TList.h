@@ -9,7 +9,7 @@ struct TLink
 template <class T>
 class TList
 {
-protected:
+public:
 	int size,pos;
 	TLink<T> *pFirst, *pNew, *pCurr, *pLast, *pStop , *pPrew;
 public:
