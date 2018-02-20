@@ -15,24 +15,25 @@ public:
 public:
 	TList();
 	~TList();
-	void InsFirst(T el);
+	virtual void InsFirst(T el);
 	void InsLast(T el);
 	void InsCurr(T el);
 	void Reset();
 	void GoNext();
-	bool isEnd();
-	void Delfirst();
+	virtual	bool isEnd();
+	virtual void Delfirst();
 	void Delcurr();
 	void Dellast();
 	T Getcurr();
 	void SetCurr(int k);
+	void Del();
 };
 
 
 template <class T>
 TList<T>::TList()
 {
-	pFirst = pNew = pLast = pStop = pCurr = pPrew = NULL;
+	pFirst = pNew = pLast = pCurr = pPrew = pStop = NULL;
 	pos = -1;
 	size = 0;
 }
@@ -40,8 +41,15 @@ TList<T>::TList()
 template <class T>
 TList<T>::~TList()
 {
-	for(;size>0;size--)
-		Delfirst();		
+	for (int i = 0; i < size;i++)
+		Delfirst();
+}
+
+template <class T>
+void TList<T>::Del()
+{
+	for (int i = 0; i < size;i++)
+		Delfirst();
 }
 
 
@@ -51,9 +59,10 @@ void TList<T>::InsFirst(T el)
 	TLink<T> *tmp = new TLink<T>;
 	tmp->value = el;
 	tmp -> pNext = pFirst;
-	if(pFirst == pStop)
+	if(pFirst == pStop || pFirst == NULL )
 	{
 		pLast = pFirst = tmp;
+		pLast -> pNext = pStop;
 		pos = 0;
 	}
 	else
@@ -69,10 +78,11 @@ void TList<T>::InsLast(T el)
 {	
 	TLink<T> *tmp = new TLink<T>;
 	tmp->value = el;
-	tmp -> pNext = pStop;
-	if(pFirst == pStop)
+	tmp->pNext = pStop;
+	if(pFirst == pStop || pFirst == NULL )
 	{
 		pLast = pFirst = tmp;
+		pLast -> pNext = pStop;
 		pos = 0;
 	}
 	else
@@ -88,9 +98,17 @@ template <class T>
 void TList<T>::InsCurr(T el)
 {
 	if(pCurr == pFirst)
+	{
 		InsFirst(el);
+		pCurr = pFirst;
+		pos = 0;
+	}
 	else if(pCurr == pStop)
+	{
 		InsLast(el);
+		pCurr = pLast;
+		pos = size - 1 ;
+	}
 	else
 	{
 		TLink<T> *tmp = new TLink<T>;
@@ -116,25 +134,32 @@ void TList<T>::Delfirst()
 		TLink<T> *tmp = pFirst;
 		pFirst = pFirst -> pNext;
 		delete tmp;
-		pos--;
 	}
-	pos--;
 	size--;
 }
 
 template <class T>
 void TList<T>::Delcurr()
 {
-	if(pos == 0)
+	if(size == 1)
 	{
 		delete pCurr;
-		pFirst = pNew = pLast = pCurr = pPrew = pStop;
+		pFirst = pNew = pLast = pCurr = pPrew = pStop = NULL;
 	}
-	else if( pos > 0)
+	else if( pos == 0)
+	{
+		Delfirst();
+		pPrew = pStop;
+		pCurr = pFirst;
+	}
+	else if(pos>1)
 	{
 		TLink<T> *tmp = pCurr;
-		pCurr = pCurr->pNext;
-		pPrew -> pNext = pCurr;
+		TLink<T> *temp = pPrew;
+		Reset();
+		while (pCurr != temp)
+			GoNext();
+		pCurr = temp;
 		delete tmp;
 	}
 	size--;
@@ -172,13 +197,23 @@ void TList<T>::Reset()
 template <class T>
 void TList<T>::GoNext()
 {
-	pPrew = pCurr;
-	pCurr = pCurr->pNext;
+	if(pCurr == pStop)
+		pPrew = pStop;
+	else
+	if( pCurr == pLast)
+	{
+		pPrew = pCurr;
+		pCurr = pStop;
+	}else
+	{
+		pPrew = pCurr;
+		pCurr = pCurr->pNext;
+	}
 	pos++;
 }
 
 template <class T>
 bool TList<T>::isEnd()
 {
-	return pCurr == pStop;
+	return (pCurr == pStop) || (pCurr == NULL);
 }
