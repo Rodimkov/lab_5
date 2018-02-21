@@ -39,7 +39,7 @@ Polinom::Polinom(TMonom *tmp,int size):THeadList()
 	pHead->value.z=-1;
 	for (int i = 0; i < size ; i++)
 	{
-		InsLast(tmp[i]);
+		Insbyorder(tmp[i]);
 	}
 }
 
@@ -84,6 +84,11 @@ Polinom& Polinom::operator=(Polinom &tmp)
 		return *this;
 	else
 	{
+		for(Reset();!isEnd();GoNext())
+		{
+			Delfirst();
+		}
+
 		Reset();
 		for(tmp.Reset();!tmp.isEnd();tmp.GoNext())
 		{
@@ -117,17 +122,55 @@ Polinom Polinom::operator+(Polinom &tmp)
 		}
 		else if(pCurr->value < tmp.pCurr->value)
 			{
+				res.GoNext();
 				res.InsCurr(tmp.pCurr->value);
 				tmp.GoNext();
 				res.GoNext();
+				//res.GoNext();
+
 			}
 		else
 		{
+				res.GoNext();
+
 				res.InsCurr(pCurr->value);
 				GoNext();
 				res.GoNext();
-
+				//res.GoNext();
 		}
+	}
+	return res;
+}
+
+Polinom Polinom::operator*(TMonom &tmp)
+{
+	Polinom res;
+	Reset();
+	while ((!isEnd()))
+	{
+			res.InsCurr(pCurr->value);
+			res.pCurr->value.coeff *= tmp.coeff;
+			res.pCurr->value.x += tmp.x;
+			res.pCurr->value.y += tmp.y;
+			res.pCurr->value.z += tmp.z;
+			GoNext();
+			if(res.pCurr->value.coeff == 0)
+			{
+				res.Delcurr();
+				GoNext();
+			}
+	}
+	return res;
+}
+
+Polinom Polinom::operator*(Polinom &tmp)
+{
+	Polinom res;
+	Reset();
+	tmp.Reset();
+	while ((!isEnd()) || (!tmp.isEnd()))
+	{
+		res = res + res*tmp.pCurr->value;
 	}
 	return res;
 }

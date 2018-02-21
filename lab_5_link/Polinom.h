@@ -23,6 +23,10 @@ public:
 	~Polinom(void);
 	Polinom& operator=(Polinom &tmp);
 	Polinom operator+(Polinom &tmp);
+	Polinom operator*(TMonom &tmp);
+	Polinom operator*(Polinom &tmp);
+
+
 	void Insbyorder(const TMonom &tmp);
 	friend std::ostream& operator<<(std::ostream& os,Polinom &tmp);
 	friend std::istream& operator>>(std::istream& is,Polinom &tmp);

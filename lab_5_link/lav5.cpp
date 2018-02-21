@@ -4,18 +4,32 @@
 #include "Polinom.h"
 using namespace std;
 
+volatile int mas[10000];
+
 int main()
 {
-	TMonom q = {5,5,5,5};
-	TMonom a = {10,10,10,10};
+	TMonom M1[] = {	{5,7,5,15},
+					{3,4,8,9},
+					{4,7,8,1},
+					{7,5,3,6},
+					};
+	TMonom M2[] = {	{4,4,8,1},
+					{3,4,1,1},
+					{4,2,8,1},
+					{1,5,8,6},
+					};
 
-	Polinom qw(&q,1);
-	Polinom aw(&a,1);
+	Polinom qw(M1,4);
+	Polinom aw(M2,4);
+	cout << qw << endl << aw;
 
-	qw.Del();
-	Polinom zx =  qw + aw;
-	cout << zx;
+	Polinom zw = qw + aw;
+	cout << qw << "  " << aw;
+	cout << endl << zw;
 
+
+
+	
 
 
 
