@@ -19,7 +19,7 @@ public:
 	void InsLast(T el);
 	void InsCurr(T el);
 	void Reset();
-	void GoNext();
+	virtual void GoNext();
 	virtual	bool isEnd();
 	virtual void Delfirst();
 	void Delcurr();
@@ -168,8 +168,14 @@ void TList<T>::Delcurr()
 template <class T>
 void TList<T>::Dellast()
 {
+	TLink<T> *temp = pPrew;
+	TLink<T> *tmp = pCurr;
+
 	for(Reset();!isEnd;GoNext());
-	Delcurr();
+		Delcurr();
+
+	pPrew = temp;
+	pCurr = tmp;
 }
 
 template <class T>

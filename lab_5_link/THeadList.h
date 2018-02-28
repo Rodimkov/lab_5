@@ -11,6 +11,8 @@ public:
 	~THeadList();
 	void InsFirst(T a);
 	void Delfirst();
+	void Reset();
+	//void GoNext();
 	//bool isEnd();
 };
 
@@ -48,3 +50,37 @@ bool THeadList<T>::isEnd()
 {
 	return pCurr == p;
 }*/
+/*
+template <class T>
+void THeadList<T>::GoNext()
+{
+	if(pCurr == pStop)
+		pPrew = pStop;
+	else
+	if( pCurr == pLast)
+	{
+		pPrew = pCurr;
+		pCurr = pStop;
+	}else
+	{
+		pPrew = pCurr;
+		pCurr = pCurr->pNext;
+	}
+	pos++;
+}*/
+template <class T>
+void THeadList<T>::Reset()
+{
+	if(pFirst == NULL)
+	{
+		pCurr = pStop;
+		pPrew = pLast;
+		pos = -1;
+	}
+	else
+	{
+	pCurr = pFirst;
+	pPrew = pStop;
+	pos = 0;
+	}
+}

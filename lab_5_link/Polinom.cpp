@@ -43,10 +43,17 @@ Polinom::Polinom(TMonom *tmp,int size):THeadList()
 	}
 }
 
-Polinom::Polinom(Polinom &tmp)
+Polinom::Polinom(Polinom &tmp):THeadList()
 {
+	pHead->value.coeff = 0;
+	pHead->value.x=-1;
+	pHead->value.y=-1;
+	pHead->value.z=-1;
 	for(tmp.Reset();!tmp.isEnd(); tmp.GoNext() )
+	{
 		InsCurr(tmp.Getcurr());
+		GoNext();
+	}
 }
 
 Polinom::~Polinom(void)
@@ -84,7 +91,7 @@ Polinom& Polinom::operator=(Polinom &tmp)
 		return *this;
 	else
 	{
-		for(Reset();!isEnd();GoNext())
+		for(Reset();!isEnd();)
 		{
 			Delfirst();
 		}
@@ -93,6 +100,7 @@ Polinom& Polinom::operator=(Polinom &tmp)
 		for(tmp.Reset();!tmp.isEnd();tmp.GoNext())
 		{
 			InsCurr(tmp.pCurr->value);
+			GoNext();
 		}
 	}
 	return *this;
@@ -120,29 +128,36 @@ Polinom Polinom::operator+(Polinom &tmp)
 				tmp.GoNext();
 			}
 		}
-		else if(pCurr->value < tmp.pCurr->value)
+		else if(pCurr->value > tmp.pCurr->value)
 			{
-				res.GoNext();
+				/*res.GoNext();
 				res.InsCurr(tmp.pCurr->value);
 				tmp.GoNext();
 				res.GoNext();
-				//res.GoNext();
-
-			}
-		else
-		{
-				res.GoNext();
-
+				//res.GoNext();*/
 				res.InsCurr(pCurr->value);
 				GoNext();
 				res.GoNext();
 				//res.GoNext();
+			}
+		else
+		{
+				/*res.GoNext();
+				res.InsCurr(pCurr->value);
+				GoNext();
+				res.GoNext();
+				//res.GoNext();*/
+				res.InsCurr(tmp.pCurr->value);
+				tmp.GoNext();
+				res.GoNext();
+				//res.GoNext();
 		}
 	}
+	std::cout << " !!! " << res << '\n' ;
 	return res;
 }
 
-Polinom Polinom::operator*(TMonom &tmp)
+Polinom Polinom::operator*(TMonom & tmp)
 {
 	Polinom res;
 	Reset();
@@ -153,13 +168,17 @@ Polinom Polinom::operator*(TMonom &tmp)
 			res.pCurr->value.x += tmp.x;
 			res.pCurr->value.y += tmp.y;
 			res.pCurr->value.z += tmp.z;
-			GoNext();
 			if(res.pCurr->value.coeff == 0)
 			{
-				res.Delcurr();
+				res.Delcurr();// шаг возможно надо делать
+			}
+			else
+			{
+				res.GoNext();
 				GoNext();
 			}
 	}
+	//std::cout << " qwe" << res << '\n' ;
 	return res;
 }
 
@@ -170,7 +189,10 @@ Polinom Polinom::operator*(Polinom &tmp)
 	tmp.Reset();
 	while ((!isEnd()) || (!tmp.isEnd()))
 	{
-		res = res + res*tmp.pCurr->value;
+		std::cout << " qwe" << res << '\n' ;
+		res = res + (*this)*tmp.pCurr->value;
+		//GoNext();
+		tmp.GoNext();
 	}
 	return res;
 }

@@ -21,10 +21,15 @@ int main()
 
 	Polinom qw(M1,4);
 	Polinom aw(M2,4);
-	cout << qw << endl << aw;
 
-	Polinom zw = qw + aw;
-	cout << qw << "  " << aw;
+	//Polinom q1(aw);
+	//Polinom q2(q1);
+	//Polinom q3(q2);
+
+
+	//cout << aw << endl << q1 << endl << q2 << endl << q3 << endl ;
+
+	Polinom zw = qw * aw;
 	cout << endl << zw;
 
 
