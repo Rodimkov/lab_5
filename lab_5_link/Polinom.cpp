@@ -153,9 +153,10 @@ Polinom Polinom::operator+(Polinom &tmp)
 				//res.GoNext();
 		}
 	}
-	std::cout << " !!! " << res << '\n' ;
+
 	return res;
 }
+
 
 Polinom Polinom::operator*(TMonom & tmp)
 {
@@ -178,7 +179,6 @@ Polinom Polinom::operator*(TMonom & tmp)
 				GoNext();
 			}
 	}
-	//std::cout << " qwe" << res << '\n' ;
 	return res;
 }
 
@@ -189,11 +189,12 @@ Polinom Polinom::operator*(Polinom &tmp)
 	tmp.Reset();
 	while ((!isEnd()) || (!tmp.isEnd()))
 	{
-		std::cout << " qwe" << res << '\n' ;
 		res = res + (*this)*tmp.pCurr->value;
 		//GoNext();
 		tmp.GoNext();
 	}
+
+
 	return res;
 }
 
@@ -216,4 +217,14 @@ std::istream& operator>>(std::istream& is,Polinom &tmp)
 	is >> Temp.coeff >> Temp.x >> Temp.y >> Temp.z;
 	tmp.Insbyorder(Temp);
 	return is;
+}
+
+
+Polinom Polinom::operator-(Polinom & tmp)
+{
+	TMonom M3 = {-1,0,0,0};
+	Polinom temp(&M3,1);
+	Polinom res;
+	res = (*this) + (temp * tmp);
+	return res;
 }

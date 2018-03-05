@@ -23,6 +23,7 @@ public:
 	~Polinom(void);
 	Polinom& operator=(Polinom &tmp);
 	Polinom operator+(Polinom &tmp);
+	Polinom operator-(Polinom &tmp);
 	Polinom operator*(TMonom &tmp);
 	Polinom operator*(Polinom &tmp);
 
