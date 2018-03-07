@@ -19,10 +19,16 @@ int main()
 					{3,2,8,9},
 					};
 
+	TMonom M4[] = {	{5,7,5,1},
+					{7,2,3,6},
+					{3,4,8,9},
+					};
+
 	TMonom M3 = {4,4,8,1};
 
+
 	Polinom qw(M1,3);
-	Polinom aw(M2,3);
+	Polinom aw(M4,3);
 
 	//Polinom q1(aw);
 	//Polinom q2(q1);
@@ -31,7 +37,7 @@ int main()
 	
 
 	Polinom zw;
-	zw = qw * aw;
+	zw = qw - aw;
 	cout << endl << zw;
 
 

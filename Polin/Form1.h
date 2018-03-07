@@ -543,7 +543,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 			 input();
 		 }
 private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
-			 apperand1 = res;
+			 apperand2 = res; // operand
 			 input();
 		 }
 };

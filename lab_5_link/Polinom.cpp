@@ -153,7 +153,6 @@ Polinom Polinom::operator+(Polinom &tmp)
 				//res.GoNext();
 		}
 	}
-
 	return res;
 }
 
@@ -171,7 +170,7 @@ Polinom Polinom::operator*(TMonom & tmp)
 			res.pCurr->value.z += tmp.z;
 			if(res.pCurr->value.coeff == 0)
 			{
-				res.Delcurr();// шаг возможно надо делать
+				res.Delcurr();
 			}
 			else
 			{
