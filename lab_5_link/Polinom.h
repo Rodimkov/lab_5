@@ -4,7 +4,7 @@
 
 struct TMonom
 {
-	double coeff;
+	int coeff;
 	int x,y,z;
 };
 

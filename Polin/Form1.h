@@ -62,6 +62,9 @@ namespace Polin {
 	private: System::Windows::Forms::Label^  label7;
 	private: System::Windows::Forms::Button^  button6;
 	private: System::Windows::Forms::Button^  button7;
+	private: System::Windows::Forms::Label^  label8;
+	private: System::Windows::Forms::Label^  label9;
+	private: System::Windows::Forms::Label^  label10;
 
 
 
@@ -97,6 +100,9 @@ namespace Polin {
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->button7 = (gcnew System::Windows::Forms::Button());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// button1
@@ -180,7 +186,7 @@ namespace Polin {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(48, 272);
+			this->label5->Location = System::Drawing::Point(142, 258);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(35, 13);
 			this->label5->TabIndex = 12;
@@ -199,7 +205,7 @@ namespace Polin {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(48, 305);
+			this->label6->Location = System::Drawing::Point(142, 291);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(35, 13);
 			this->label6->TabIndex = 15;
@@ -244,7 +250,7 @@ namespace Polin {
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(48, 353);
+			this->label7->Location = System::Drawing::Point(142, 325);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(35, 13);
 			this->label7->TabIndex = 19;
@@ -252,7 +258,7 @@ namespace Polin {
 			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(362, 262);
+			this->button6->Location = System::Drawing::Point(457, 262);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(154, 42);
 			this->button6->TabIndex = 20;
@@ -262,7 +268,7 @@ namespace Polin {
 			// 
 			// button7
 			// 
-			this->button7->Location = System::Drawing::Point(362, 310);
+			this->button7->Location = System::Drawing::Point(457, 310);
 			this->button7->Name = L"button7";
 			this->button7->Size = System::Drawing::Size(154, 42);
 			this->button7->TabIndex = 21;
@@ -270,11 +276,41 @@ namespace Polin {
 			this->button7->UseVisualStyleBackColor = true;
 			this->button7->Click += gcnew System::EventHandler(this, &Form1::button7_Click);
 			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(53, 325);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(61, 13);
+			this->label8->TabIndex = 22;
+			this->label8->Text = L"результат ";
+			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Location = System::Drawing::Point(53, 262);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(60, 13);
+			this->label9->TabIndex = 23;
+			this->label9->Text = L"полином 1";
+			// 
+			// label10
+			// 
+			this->label10->AutoSize = true;
+			this->label10->Location = System::Drawing::Point(53, 291);
+			this->label10->Name = L"label10";
+			this->label10->Size = System::Drawing::Size(60, 13);
+			this->label10->TabIndex = 24;
+			this->label10->Text = L"полином 2";
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(667, 429);
+			this->Controls->Add(this->label10);
+			this->Controls->Add(this->label9);
+			this->Controls->Add(this->label8);
 			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button6);
 			this->Controls->Add(this->label7);
@@ -312,17 +348,18 @@ namespace Polin {
 			{
 				tmp = apperand1.Getcurr();
 
+				if(tmp.coeff != 0)
+				{
+					label5->Text +=  System::Convert::ToString(tmp.coeff);
+					if(tmp.x !=0)
+						label5->Text +=  "*x^" + System::Convert::ToString(tmp.x);
+					if(tmp.y !=0)
+						label5->Text +=  "*y^" + System::Convert::ToString(tmp.y);					
+					if(tmp.z !=0)
+						label5->Text +=  "*z^" + System::Convert::ToString(tmp.z);					
 				
-				label5->Text +=  System::Convert::ToString(tmp.coeff);
-				if(tmp.x !=0)
-					label5->Text +=  "*x^" + System::Convert::ToString(tmp.x);
-				if(tmp.y !=0)
-					label5->Text +=  "*y^" + System::Convert::ToString(tmp.y);					
-				if(tmp.z !=0)
-					label5->Text +=  "*z^" + System::Convert::ToString(tmp.z);					
-				
-				label5->Text += " ";								
-												
+					label5->Text += " ";																				
+				}
 				apperand1.GoNext();
 
 				for(;!apperand1.isEnd();apperand1.GoNext())
@@ -346,20 +383,23 @@ namespace Polin {
 			apperand2.Reset();
 			if(!apperand2.isEnd())
 			{
-				tmp = apperand2.Getcurr();
 
+				if(tmp.coeff != 0)
+				{
+					tmp = apperand2.Getcurr();
+
+					label6->Text +=  System::Convert::ToString(tmp.coeff);
+					if(tmp.x !=0)
+						label6->Text +=  "*x^" + System::Convert::ToString(tmp.x);
+					if(tmp.y !=0)
+						label6->Text +=  "*y^" + System::Convert::ToString(tmp.y);					
+					if(tmp.z !=0)
+						label6->Text +=  "*z^" + System::Convert::ToString(tmp.z);					
 				
-				label6->Text +=  System::Convert::ToString(tmp.coeff);
-				if(tmp.x !=0)
-					label6->Text +=  "*x^" + System::Convert::ToString(tmp.x);
-				if(tmp.y !=0)
-					label6->Text +=  "*y^" + System::Convert::ToString(tmp.y);					
-				if(tmp.z !=0)
-					label6->Text +=  "*z^" + System::Convert::ToString(tmp.z);					
-				
-				label6->Text += " ";								
+					label6->Text += " ";								
 												
-				apperand2.GoNext();
+					apperand2.GoNext();
+				}
 
 				for(;!apperand2.isEnd();apperand2.GoNext())
 				{
@@ -378,6 +418,11 @@ namespace Polin {
 
 				}
 			}
+			if(label5->Text == "")
+				label5->Text = "0";
+			
+			if(label6->Text == "")
+				label6->Text = "0";
 		}
 
 		void inres()
@@ -385,43 +430,57 @@ namespace Polin {
 			label7->Text = "";
 			TMonom tmp;
 			res.Reset();
-			tmp = res.Getcurr();
-			if(!res.isEnd())
+			if(res.isEnd())
+				label7->Text += "0";
+			else
 			{
-
-				
-				label7->Text +=  System::Convert::ToString(tmp.coeff);
-				if(tmp.x !=0)
-					label7->Text +=  "*x^" + System::Convert::ToString(tmp.x);
-				if(tmp.y !=0)
-					label7->Text +=  "*y^" + System::Convert::ToString(tmp.y);					
-				if(tmp.z !=0)
-					label7->Text +=  "*z^" + System::Convert::ToString(tmp.z);					
-				
-				label7->Text += " ";								
-				res.GoNext();
-
-				for(;!res.isEnd();res.GoNext())
+				tmp = res.Getcurr();
+				if(!res.isEnd())
 				{
-					tmp = res.Getcurr();
-					if(tmp.coeff > 0)
-						label7->Text += "+" + System::Convert::ToString(tmp.coeff);
-					else 
-						label7->Text +=  System::Convert::ToString(tmp.coeff);
+
+				
+					label7->Text +=  System::Convert::ToString(tmp.coeff);
 					if(tmp.x !=0)
 						label7->Text +=  "*x^" + System::Convert::ToString(tmp.x);
 					if(tmp.y !=0)
 						label7->Text +=  "*y^" + System::Convert::ToString(tmp.y);					
 					if(tmp.z !=0)
-						label7->Text +=  "*z^" + System::Convert::ToString(tmp.z);
-
+						label7->Text +=  "*z^" + System::Convert::ToString(tmp.z);					
+				
 					label7->Text += " ";								
-							
+					res.GoNext();
 
+					for(;!res.isEnd();res.GoNext())
+					{
+						tmp = res.Getcurr();
+						if(tmp.coeff > 0)
+						{
+							label7->Text += "+" + System::Convert::ToString(tmp.coeff);
+
+						if(tmp.x !=0)
+							label7->Text +=  "*x^" + System::Convert::ToString(tmp.x);
+						if(tmp.y !=0)
+							label7->Text +=  "*y^" + System::Convert::ToString(tmp.y);					
+						if(tmp.z !=0)
+							label7->Text +=  "*z^" + System::Convert::ToString(tmp.z);
+
+						}
+						if(tmp.coeff < 0)
+						{
+							label7->Text +=  System::Convert::ToString(tmp.coeff);
+						if(tmp.x !=0)
+							label7->Text +=  "*x^" + System::Convert::ToString(tmp.x);
+						if(tmp.y !=0)
+							label7->Text +=  "*y^" + System::Convert::ToString(tmp.y);					
+						if(tmp.z !=0)
+							label7->Text +=  "*z^" + System::Convert::ToString(tmp.z);
+						}
+						label7->Text += " ";								
+						
+					}
 				}
 			}
 		}
-
 
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -434,10 +493,10 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 			 TMonom tmp;
 
 			 char s = str[0];
-			 tmp.coeff = System::Convert::ToDouble(str[0]) - 48.0;
-			 tmp.x = System::Convert::ToInt32(str[1]) - 48 ;
-			 tmp.y = System::Convert::ToInt32(str[2]) - 48 ;
-			 tmp.z = System::Convert::ToInt32(str[3]) - 48;
+			 tmp.coeff = System::Convert::ToInt32(textBox1->Text) ;
+			 tmp.x = System::Convert::ToInt32(textBox2->Text)  ;
+			 tmp.y = System::Convert::ToInt32(textBox3->Text)  ;
+			 tmp.z = System::Convert::ToInt32(textBox4->Text) ;
 			 
 			 apperand1.Insbyorder(tmp);
 
@@ -453,10 +512,10 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 
 			 TMonom tmp;
 			 char s = str[0];
-			 tmp.coeff = System::Convert::ToDouble(str[0]) - 48.0;
-			 tmp.x = System::Convert::ToInt32(str[1]) - 48 ;
-			 tmp.y = System::Convert::ToInt32(str[2]) - 48 ;
-			 tmp.z = System::Convert::ToInt32(str[3]) - 48;
+			 tmp.coeff = System::Convert::ToInt32(textBox1->Text) ;
+			 tmp.x = System::Convert::ToInt32(textBox2->Text)  ;
+			 tmp.y = System::Convert::ToInt32(textBox3->Text)  ;
+			 tmp.z = System::Convert::ToInt32(textBox4->Text) ;
 			 
 			 apperand2.Insbyorder(tmp);
 
@@ -476,7 +535,7 @@ private: System::Void button4_Click(System::Object^  sender, System::EventArgs^ 
 			 inres();
 		 }
 private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
-			 res = apperand1 + apperand2;
+			 res = apperand1 * apperand2;
 			 inres();
 		 }
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
