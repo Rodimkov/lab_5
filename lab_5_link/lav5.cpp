@@ -10,7 +10,7 @@ volatile int mas[10000];
 
 int main()
 {
-	TMonom M1[] = {	{5,7,5,1},
+	TMonom M1[] = {	
 					{7,5,3,6},
 					{3,4,8,9},
 					};
@@ -19,7 +19,7 @@ int main()
 					{3,2,8,9},
 					};
 
-	TMonom M4[] = {	{5,7,5,1},
+	TMonom M4[] = {
 					{7,2,3,6},
 					{3,4,8,9},
 					};
@@ -27,8 +27,8 @@ int main()
 	TMonom M3 = {4,4,8,1};
 
 
-	Polinom qw(M1,3);
-	Polinom aw(M4,3);
+	Polinom qw(M1,2);
+	Polinom aw(M4,2);
 
 	//Polinom q1(aw);
 	//Polinom q2(q1);

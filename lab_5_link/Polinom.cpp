@@ -115,7 +115,7 @@ Polinom Polinom::operator+(Polinom &tmp)
 	{
 		if(pCurr->value == tmp.pCurr->value)
 		{
-			res.InsCurr(pCurr->value);
+ 			res.InsCurr(pCurr->value);
 			res.pCurr->value.coeff += tmp.pCurr->value.coeff;
 			if(res.pCurr->value.coeff == 0)
 			{

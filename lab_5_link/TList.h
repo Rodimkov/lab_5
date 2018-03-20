@@ -152,14 +152,13 @@ void TList<T>::Delcurr()
 		pPrew = pStop;
 		pCurr = pFirst;
 	}
-	else if(pos>1)
+	else
 	{
 		TLink<T> *tmp = pCurr;
-		TLink<T> *temp = pPrew;
-		Reset();
-		while (pCurr != temp)
-			GoNext();
-		pCurr = temp;
+
+		pPrew->pNext = pCurr;
+
+		pCurr = pCurr->pNext;
 		delete tmp;
 	}
 	size--;
