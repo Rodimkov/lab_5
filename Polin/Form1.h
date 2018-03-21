@@ -215,7 +215,7 @@ namespace Polin {
 			// 
 			this->button3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->button3->Location = System::Drawing::Point(473, 58);
+			this->button3->Location = System::Drawing::Point(565, 58);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(75, 23);
 			this->button3->TabIndex = 16;
@@ -227,7 +227,7 @@ namespace Polin {
 			// 
 			this->button4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->button4->Location = System::Drawing::Point(473, 87);
+			this->button4->Location = System::Drawing::Point(565, 87);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(75, 24);
 			this->button4->TabIndex = 17;
@@ -239,7 +239,7 @@ namespace Polin {
 			// 
 			this->button5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->button5->Location = System::Drawing::Point(473, 117);
+			this->button5->Location = System::Drawing::Point(565, 117);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(75, 23);
 			this->button5->TabIndex = 18;
@@ -258,7 +258,7 @@ namespace Polin {
 			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(457, 262);
+			this->button6->Location = System::Drawing::Point(549, 248);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(154, 42);
 			this->button6->TabIndex = 20;
@@ -268,7 +268,7 @@ namespace Polin {
 			// 
 			// button7
 			// 
-			this->button7->Location = System::Drawing::Point(457, 310);
+			this->button7->Location = System::Drawing::Point(549, 296);
 			this->button7->Name = L"button7";
 			this->button7->Size = System::Drawing::Size(154, 42);
 			this->button7->TabIndex = 21;
@@ -307,7 +307,7 @@ namespace Polin {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(667, 429);
+			this->ClientSize = System::Drawing::Size(930, 560);
 			this->Controls->Add(this->label10);
 			this->Controls->Add(this->label9);
 			this->Controls->Add(this->label8);
@@ -437,7 +437,6 @@ namespace Polin {
 				tmp = res.Getcurr();
 				if(!res.isEnd())
 				{
-
 				
 					label7->Text +=  System::Convert::ToString(tmp.coeff);
 					if(tmp.x !=0)

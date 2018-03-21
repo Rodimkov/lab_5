@@ -124,6 +124,7 @@ Polinom Polinom::operator+(Polinom &tmp)
 				GoNext();
 			}else
 			{
+				res.GoNext();
 				GoNext();
 				tmp.GoNext();
 			}
